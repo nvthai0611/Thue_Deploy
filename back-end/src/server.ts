@@ -34,10 +34,30 @@ notifyExpiringContracts();
 checkExpiredBoostingAds();
 
 // Add CORS for NextJS frontend
+const allowedOrigins = [
+  "http://localhost:3000", // Development
+  "https://holarental.website", // Production domain
+  "https://www.holarental.website", // Production www
+  "https://thue-deploy.vercel.app", // Vercel default domain
+];
+
+// Add FRONTEND_URL from env if it exists and not already in list
+if (FRONTEND_URL && !allowedOrigins.includes(FRONTEND_URL)) {
+  allowedOrigins.push(FRONTEND_URL);
+}
+
 app.use(
   cors({
-    origin:
-      ENV.NodeEnv === NodeEnvs.Dev ? "http://localhost:3000" : FRONTEND_URL,
+      origin: (origin: any, callback: any) => {
+      // Allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin) return callback(null, true);
+      
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   }),
 );

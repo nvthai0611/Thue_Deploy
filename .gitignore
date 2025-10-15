@@ -1,1 +1,4 @@
 *.env
+backend-env-production.txt
+backend-env-template.txt
+frontend-env-template.txt
