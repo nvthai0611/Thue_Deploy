@@ -48,7 +48,7 @@ if (FRONTEND_URL && !allowedOrigins.includes(FRONTEND_URL)) {
 
 app.use(
   cors({
-      origin: (origin: any, callback: any) => {
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
       // Allow requests with no origin (like mobile apps, curl, postman)
       if (!origin) return callback(null, true);
       
