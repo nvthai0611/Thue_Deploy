@@ -1,0 +1,12 @@
+# Dùng "localhost" để test trên máy của bạn
+localhost {
+    # Luồng 1: Chuyển tiếp các request có đường dẫn /api/ đến backend
+    handle_path /api/* {
+        reverse_proxy api:4000
+    }
+
+    # Luồng 2: Tất cả các request còn lại sẽ được chuyển đến frontend
+    handle {
+        reverse_proxy frontend:3000
+    }
+}

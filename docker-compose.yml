@@ -1,0 +1,52 @@
+name: hola_rental_app
+services:
+  api:
+    build:
+      context: ./back-end
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./back-end/config/.env.production
+    networks:
+      - hola-network
+    ports:
+      - "4000:4000"
+
+  frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./front-end/.env
+    networks:
+      - hola-network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  # Sửa lại thụt lề cho caddy ở đây, đưa nó ra ngoài
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - hola-network
+    depends_on:
+      - frontend
+      - api
+
+networks:
+  hola-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:

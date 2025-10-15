@@ -1,0 +1,651 @@
+[
+  {
+    "id": "HA001",
+    "owner_id": "USER001",
+    "description": "Nhà trọ sinh viên gần Đại học Bách Khoa Hà Nội, đầy đủ tiện nghi.",
+    "location": [
+      {
+        "address": "Số 12, Đường Giải Phóng",
+        "district": "Hai Bà Trưng",
+        "city": "Hà Nội"
+      }
+    ],
+    "expected_rooms": 5,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc1.pdf",
+        "type": "Sổ đỏ",
+        "uploaded_at": "2025-01-15T10:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [
+      {
+        "user_id": "USER002",
+        "score": 4.5,
+        "comment": "Phòng sạch sẽ, giá hợp lý.",
+        "status": "approved",
+        "created_at": "2025-02-01T08:00:00Z"
+      }
+    ],
+    "view_count": 120,
+    "pending_reasons": [],
+    "created_at": "2025-01-10T09:00:00Z",
+    "updated_at": "2025-02-05T14:30:00Z",
+    "rooms": [
+      {
+        "id": "ROOM001",
+        "housing_area_id": "HA001",
+        "tenant_id": null,
+        "title": "Phòng trọ 20m2 gần ĐH Bách Khoa",
+        "price": 3000000,
+        "area": 20,
+        "facilities": [
+          { "name": "Điều hòa", "quantity": 1 },
+          { "name": "Gường", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/JRdcfxzM3RBKAkK2UcBuyvBrJ17S7e2mw0Fo9fH7BWo/preset:listing/plain/6e7b559dd19cf2ed325c1e3d8aac2f5c-2933952502607099047.jpg",
+            "caption": "Phòng sạch sẽ",
+            "uploaded_at": "2025-01-10T10:00:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "single",
+        "max_occupants": 2,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-01-10T09:30:00Z",
+        "updated_at": "2025-01-10T09:30:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA002",
+    "owner_id": "USER003",
+    "description": "Khu nhà trọ cao cấp tại Quận 7, TP.HCM.",
+    "location": [
+      {
+        "address": "Số 45, Đường Nguyễn Hữu Thọ",
+        "district": "Quận 7",
+        "city": "TP. Hồ Chí Minh"
+      }
+    ],
+    "expected_rooms": 3,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc2.pdf",
+        "type": "Hợp đồng mua bán",
+        "uploaded_at": "2025-03-01T09:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [],
+    "view_count": 80,
+    "pending_reasons": [
+      {
+        "title": "Cập nhật giá",
+        "price": 4500000,
+        "status": "pending"
+      }
+    ],
+    "created_at": "2025-02-20T10:00:00Z",
+    "updated_at": "2025-03-02T15:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM002",
+        "housing_area_id": "HA002",
+        "tenant_id": "USER004",
+        "title": "Phòng trọ cao cấp 25m2",
+        "price": 4500000,
+        "area": 25,
+        "facilities": [
+          { "name": "Máy giặt", "quantity": 1 },
+          { "name": "Tủ lạnh", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/IHRgszbO8AER9ixmWhAIJw1buRJgjbOQYbarqOc2G64/preset:listing/plain/850149a0da2bc0a95a98655402f22fd1-2933959330980024739.jpg",
+            "caption": "Phòng thoáng mát",
+            "uploaded_at": "2025-02-20T11:00:00Z"
+          }
+        ],
+        "boost_history": [
+          {
+            "priority": "high",
+            "start_at": "2025-03-01T00:00:00Z",
+            "end_at": "2025-03-07T23:59:59Z",
+            "reason": "Tăng lượt xem"
+          }
+        ],
+        "type": "single",
+        "max_occupants": 2,
+        "status": "rented",
+        "rental_history": [
+          {
+            "tenant_id": "USER004",
+            "contract_id": "CONTRACT001",
+            "start_date": "2025-03-01T00:00:00Z",
+            "end_date": "2025-09-01T00:00:00Z"
+          }
+        ],
+        "pending_update": [],
+        "created_at": "2025-02-20T10:30:00Z",
+        "updated_at": "2025-03-01T09:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA003",
+    "owner_id": "USER005",
+    "description": "Nhà nguyên căn tại Đà Nẵng, phù hợp gia đình.",
+    "location": [
+      {
+        "address": "Số 78, Đường Lê Lợi",
+        "district": "Hải Châu",
+        "city": "Đà Nẵng"
+      }
+    ],
+    "expected_rooms": 1,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc3.pdf",
+        "type": "Sổ đỏ",
+        "uploaded_at": "2025-04-01T08:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [
+      {
+        "user_id": "USER006",
+        "score": 4.8,
+        "comment": "Nhà đẹp, gần biển.",
+        "status": "approved",
+        "created_at": "2025-04-10T09:00:00Z"
+      }
+    ],
+    "view_count": 200,
+    "pending_reasons": [],
+    "created_at": "2025-04-01T07:00:00Z",
+    "updated_at": "2025-04-15T14:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM003",
+        "housing_area_id": "HA003",
+        "tenant_id": null,
+        "title": "Nhà nguyên căn 100m2 gần biển Đà Nẵng",
+        "price": 10000000,
+        "area": 100,
+        "facilities": [
+          { "name": "Bếp", "quantity": 1 },
+          { "name": "Máy lạnh", "quantity": 2 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/S8_I2H-9CEdYZ-5u27-yMPy5YpXtHDdivvYVnZVkAwU/preset:listing/plain/f7184ae5bd0dde57fc50808ef557b032-2934091101081790908.jpg",
+            "caption": "Nhà rộng rãi",
+            "uploaded_at": "2025-04-01T08:30:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "entire",
+        "max_occupants": 5,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-04-01T07:30:00Z",
+        "updated_at": "2025-04-01T07:30:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA004",
+    "owner_id": "USER007",
+    "description": "Khu trọ sinh viên tại Cần Thơ.",
+    "location": [
+      {
+        "address": "Số 15, Đường 3/2",
+        "district": "Ninh Kiều",
+        "city": "Cần Thơ"
+      }
+    ],
+    "expected_rooms": 4,
+    "legal_document": [],
+    "status": "pending",
+    "rating": [],
+    "view_count": 50,
+    "pending_reasons": [
+      {
+        "title": "Chờ phê duyệt",
+        "price": 2000000,
+        "status": "pending"
+      }
+    ],
+    "created_at": "2025-05-01T10:00:00Z",
+    "updated_at": "2025-05-02T09:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM004",
+        "housing_area_id": "HA004",
+        "tenant_id": null,
+        "title": "Phòng trọ giá rẻ 15m2",
+        "price": 2000000,
+        "area": 15,
+        "facilities": [
+          { "name": "Quạt", "quantity": 1 },
+          { "name": "Bàn học", "quantity": 1 }
+        ],
+        "images": [{
+            "uri": "https://cdn.chotot.com/kS0DrWTq9hECJR679WsXZO9N8FPCS4lX4Ml7gGApl9M/preset:listing/plain/ec0b26c8cb853baa2b43a5bc23d90189-2922528711006603339.jpg",
+            "caption": "Nhà rộng rãi",
+            "uploaded_at": "2025-04-01T08:30:00Z"
+          }],
+        "boost_history": [],
+        "type": "single",
+        "max_occupants": 1,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-05-01T10:30:00Z",
+        "updated_at": "2025-05-01T10:30:00Z"
+      },
+      {
+        "id": "ROOM005",
+        "housing_area_id": "HA004",
+        "tenant_id": null,
+        "title": "Phòng trọ 18m2 gần ĐH Cần Thơ",
+        "price": 2200000,
+        "area": 18,
+        "facilities": [
+          { "name": "Điều hòa", "quantity": 1 },
+          { "name": "Tủ quần áo", "quantity": 1 }
+        ],
+        "images": [],
+        "boost_history": [],
+        "type": "single",
+        "max_occupants": 2,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-05-01T10:45:00Z",
+        "updated_at": "2025-05-01T10:45:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA005",
+    "owner_id": "USER008",
+    "description": "Căn hộ dịch vụ tại Quận 1, TP.HCM.",
+    "location": [
+      {
+        "address": "Số 90, Đường Lê Lợi",
+        "district": "Quận 1",
+        "city": "TP. Hồ Chí Minh"
+      }
+    ],
+    "expected_rooms": 2,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc5.pdf",
+        "type": "Sổ hồng",
+        "uploaded_at": "2025-05-10T09:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [
+      {
+        "user_id": "USER009",
+        "score": 4.2,
+        "comment": "Vị trí trung tâm, tiện lợi.",
+        "status": "approved",
+        "created_at": "2025-05-15T10:00:00Z"
+      }
+    ],
+    "view_count": 150,
+    "pending_reasons": [],
+    "created_at": "2025-05-10T08:00:00Z",
+    "updated_at": "2025-05-15T12:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM006",
+        "housing_area_id": "HA005",
+        "tenant_id": "USER010",
+        "title": "Căn hộ dịch vụ 30m2 Quận 1",
+        "price": 8000000,
+        "area": 30,
+        "facilities": [
+          { "name": "Máy giặt", "quantity": 1 },
+          { "name": "Tivi", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/zvIROEKWfRZc-zoKogRPk_UaPj4LoEZwbPQNilcpMZM/preset:listing/plain/cfc35a94b8165b4f0360ed3f43d9656b-2927890987181273784.jpg",
+            "caption": "Căn hộ hiện đại",
+            "uploaded_at": "2025-05-10T09:30:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "entire",
+        "max_occupants": 3,
+        "status": "rented",
+        "rental_history": [
+          {
+            "tenant_id": "USER010",
+            "contract_id": "CONTRACT002",
+            "start_date": "2025-05-15T00:00:00Z",
+            "end_date": "2025-11-15T00:00:00Z"
+          }
+        ],
+        "pending_update": [],
+        "created_at": "2025-05-10T09:15:00Z",
+        "updated_at": "2025-05-15T10:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA006",
+    "owner_id": "USER011",
+    "description": "Nhà trọ gần Đại học Sư Phạm Đà Nẵng.",
+    "location": [
+      {
+        "address": "Số 123, Đường Nguyễn Lương Bằng",
+        "district": "Liên Chiểu",
+        "city": "Đà Nẵng"
+      }
+    ],
+    "expected_rooms": 3,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc6.pdf",
+        "type": "Sổ đỏ",
+        "uploaded_at": "2025-06-01T08:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [],
+    "view_count": 90,
+    "pending_reasons": [],
+    "created_at": "2025-06-01T07:00:00Z",
+    "updated_at": "2025-06-01T07:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM007",
+        "housing_area_id": "HA006",
+        "tenant_id": null,
+        "title": "Phòng trọ 22m2 gần ĐH Sư Phạm",
+        "price": 2500000,
+        "area": 22,
+        "facilities": [
+          { "name": "Quạt", "quantity": 1 },
+          { "name": "Bàn học", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/EUj8JUOrTRSG7T3BuXCBZGYECi-M-GHejTl7xk_MKuw/preset:listing/plain/23db4fc819d5bbe7e54ac069265ffa3d-2934254085237165256.jpg",
+            "caption": "Phòng sáng sủa",
+            "uploaded_at": "2025-06-01T07:30:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "single",
+        "max_occupants": 2,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-06-01T07:15:00Z",
+        "updated_at": "2025-06-01T07:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA007",
+    "owner_id": "USER012",
+    "description": "Khu trọ sinh viên tại Huế.",
+    "location": [
+      {
+        "address": "Số 56, Đường Lê Lợi",
+        "district": "Phú Nhuận",
+        "city": "Huế"
+      }
+    ],
+    "expected_rooms": 2,
+    "legal_document": [],
+    "status": "pending",
+    "rating": [],
+    "view_count": 30,
+    "pending_reasons": [
+      {
+        "title": "Chờ xác minh",
+        "price": 1800000,
+        "status": "pending"
+      }
+    ],
+    "created_at": "2025-06-10T09:00:00Z",
+    "updated_at": "2025-06-10T09:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM008",
+        "housing_area_id": "HA007",
+        "tenant_id": null,
+        "title": "Phòng trọ 16m2 tại Huế",
+        "price": 1800000,
+        "area": 16,
+        "facilities": [
+          { "name": "Quạt", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/R7eLumcYIZrth5QxSKV8ir8yl4Q7l-kDT-KhfhBzNZg/preset:listing/plain/1b04d318e87979ad8194cac06072480e-2934253582538067495.jpg",
+            "caption": "Phòng sáng sủa",
+            "uploaded_at": "2025-06-01T07:30:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "single",
+        "max_occupants": 1,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-06-10T09:15:00Z",
+        "updated_at": "2025-06-10T09:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA008",
+    "owner_id": "USER013",
+    "description": "Nhà nguyên căn tại Nha Trang, phù hợp kinh doanh.",
+    "location": [
+      {
+        "address": "Số 89, Đường Trần Phú",
+        "district": "Lộc Thọ",
+        "city": "Nha Trang"
+      }
+    ],
+    "expected_rooms": 1,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc8.pdf",
+        "type": "Sổ hồng",
+        "uploaded_at": "2025-06-15T10:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [
+      {
+        "user_id": "USER014",
+        "score": 4.9,
+        "comment": "Vị trí đẹp, thuận tiện kinh doanh.",
+        "status": "approved",
+        "created_at": "2025-06-20T08:00:00Z"
+      }
+    ],
+    "view_count": 300,
+    "pending_reasons": [],
+    "created_at": "2025-06-15T09:00:00Z",
+    "updated_at": "2025-06-20T10:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM009",
+        "housing_area_id": "HA008",
+        "tenant_id": null,
+        "title": "Nhà nguyên căn 120m2 tại Nha Trang",
+        "price": 15000000,
+        "area": 120,
+        "facilities": [
+          { "name": "Bếp", "quantity": 1 },
+          { "name": "Máy lạnh", "quantity": 3 }
+        ],
+        "images": [
+          {
+            "uri": "https://cdn.chotot.com/cRLzOo2tc9NCTVFlvaPefHxBOFTRwQ9WaStmkj5Kp_w/preset:listing/plain/39e8afcdb97fc59329826951d5ec51ac-2932900728025915545.jpg",
+            "caption": "Nhà mặt tiền",
+            "uploaded_at": "2025-06-15T09:30:00Z"
+          }
+        ],
+        "boost_history": [
+          {
+            "priority": "medium",
+            "start_at": "2025-06-16T00:00:00Z",
+            "end_at": "2025-06-23T23:59:59Z",
+            "reason": "Tăng hiển thị"
+          }
+        ],
+        "type": "entire",
+        "max_occupants": 6,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-06-15T09:15:00Z",
+        "updated_at": "2025-06-15T09:15:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA009",
+    "owner_id": "USER015",
+    "description": "Khu trọ cao cấp tại Bình Dương.",
+    "location": [
+      {
+        "address": "Số 34, Đường Lê Hồng Phong",
+        "district": "Thủ Dầu Một",
+        "city": "Bình Dương"
+      }
+    ],
+    "expected_rooms": 3,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc9.pdf",
+        "type": "Sổ đỏ",
+        "uploaded_at": "2025-06-20T08:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [],
+    "view_count": 70,
+    "pending_reasons": [],
+    "created_at": "2025-06-20T07:00:00Z",
+    "updated_at": "2025-06-20T07:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM010",
+        "housing_area_id": "HA009",
+        "tenant_id": "USER016",
+        "title": "Phòng trọ 28m2 tại Bình Dương",
+        "price": 4000000,
+        "area": 28,
+        "facilities": [
+          { "name": "Điều hòa", "quantity": 1 },
+          { "name": "Tủ lạnh", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://example.com/images/room10.jpg",
+            "caption": "Phòng hiện đại",
+            "uploaded_at": "2025-06-20T07:30:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "single",
+        "max_occupants": 2,
+        "status": "rented",
+        "rental_history": [
+          {
+            "tenant_id": "USER016",
+            "contract_id": "CONTRACT003",
+            "start_date": "2025-06-25T00:00:00Z",
+            "end_date": "2025-12-25T00:00:00Z"
+          }
+        ],
+        "pending_update": [],
+        "created_at": "2025-06-20T07:15:00Z",
+        "updated_at": "2025-06-25T09:00:00Z"
+      }
+    ]
+  },
+  {
+    "id": "HA010",
+    "owner_id": "USER017",
+    "description": "Căn hộ dịch vụ tại Vũng Tàu.",
+    "location": [
+      {
+        "address": "Số 67, Đường Ba Cộng Hòa",
+        "district": "Phường 2",
+        "city": "Vũng Tàu"
+      }
+    ],
+    "expected_rooms": 1,
+    "legal_document": [
+      {
+        "uri": "https://example.com/legal/doc10.pdf",
+        "type": "Sổ hồng",
+        "uploaded_at": "2025-06-25T10:00:00Z"
+      }
+    ],
+    "status": "active",
+    "rating": [
+      {
+        "user_id": "USER018",
+        "score": 4.7,
+        "comment": "Căn hộ sạch sẽ, gần biển.",
+        "status": "approved",
+        "created_at": "2025-06-30T09:00:00Z"
+      }
+    ],
+    "view_count": 180,
+    "pending_reasons": [],
+    "created_at": "2025-06-25T09:00:00Z",
+    "updated_at": "2025-06-30T10:00:00Z",
+    "rooms": [
+      {
+        "id": "ROOM011",
+        "housing_area_id": "HA010",
+        "tenant_id": null,
+        "title": "Căn hộ dịch vụ 35m2 tại Vũng Tàu",
+        "price": 7000000,
+        "area": 35,
+        "facilities": [
+          { "name": "Máy giặt", "quantity": 1 },
+          { "name": "Tivi", "quantity": 1 }
+        ],
+        "images": [
+          {
+            "uri": "https://example.com/images/room11.jpg",
+            "caption": "Căn hộ view biển",
+            "uploaded_at": "2025-06-25T09:30:00Z"
+          }
+        ],
+        "boost_history": [],
+        "type": "entire",
+        "max_occupants": 3,
+        "status": "available",
+        "rental_history": [],
+        "pending_update": [],
+        "created_at": "2025-06-25T09:15:00Z",
+        "updated_at": "2025-06-25T09:15:00Z"
+      }
+    ]
+  }
+]

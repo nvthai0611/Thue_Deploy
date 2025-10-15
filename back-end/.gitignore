@@ -1,0 +1,16 @@
+**/node_modules
+dist/
+temp/
+**/**/*.log
+config.js
+
+# env files
+config/.env.development
+config/.env.production
+config/.env.test
+
+# other sensitive files
+*.pem
+*.key
+.DS_Store
+Thumbs.db
