@@ -162,7 +162,7 @@ export const signInWithOAuthAction = async (formData: FormData) => {
   const baseUrl = isDev
     ? "http://localhost:3000"
     : process.env.NEXT_PUBLIC_SITE_URL ||
-      "https://hola-rental-client.onrender.com";
+      "https://thue-deploy.onrender.com";
   const redirectTo = `${baseUrl}/auth/callback`;
 
   console.log("Sending redirectTo to Supabase:", redirectTo);
