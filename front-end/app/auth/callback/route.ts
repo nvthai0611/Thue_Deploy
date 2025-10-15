@@ -15,7 +15,7 @@ export async function GET(request: Request) {
     
     if (error) {
       console.error("OAuth callback error:", error);
-      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/sign-in?error=Authentication failed`);
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL || "https://holarental.website"}/sign-in?error=Authentication failed`);
     }
 
     // Check if user is active after successful authentication
@@ -28,19 +28,19 @@ export async function GET(request: Request) {
 
       if (userError) {
         console.error("Error checking user status:", userError);
-        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/sign-in?error=Failed to verify user status`);
+        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL || "https://holarental.website"}/sign-in?error=Failed to verify user status`);
       }
 
       if (!userData?.is_active) {
         // Sign out inactive user and redirect to sign-in with error
         await supabase.auth.signOut();
-        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/sign-in?error=Account has been disabled`);
+        return NextResponse.redirect(`${process.env.NEXT_PUBLIC_SITE_URL || "https://holarental.website"}/sign-in?error=Account has been disabled`);
       }
     }
   }
 
   // Use NEXT_PUBLIC_SITE_URL instead of origin to avoid internal port issues on Render
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://holarental.website";
 
   if (redirectTo) {
     return NextResponse.redirect(`${baseUrl}${redirectTo}`);
