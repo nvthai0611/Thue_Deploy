@@ -55,6 +55,7 @@ export default {
     Base: "/transactions",
     Add: "/add",
     History: "/history",
+    All: "/all",
   },
   ZaloPay: {
     Base: "/zalo-pay",

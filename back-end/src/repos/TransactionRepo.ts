@@ -30,7 +30,7 @@ async function updateTransactionRefunds(
 async function findByContractId(
   contractId: string,
 ): Promise<TransactionDocument | null> {
-  return Transaction.findOne({ contract_id: contractId});
+  return Transaction.findOne({ contract_id: contractId });
 }
 
 async function getTransaction(
@@ -43,7 +43,7 @@ async function getTransaction(
     Transaction.find({ user_id: userId })
       .skip(skip)
       .limit(limit)
-      .sort({ createdAt: -1 }), 
+      .sort({ createdAt: -1 }),
     Transaction.countDocuments({ user_id: userId }),
   ]);
   return { data, total, totalPages: Math.ceil(total / limit) };
@@ -52,9 +52,20 @@ async function getTransaction(
 async function getTransactionWhereContractId(
   contractId: string,
 ): Promise<TransactionDocument | null> {
-  return Transaction
-    .findOne({ contract_id: contractId })
-    .sort({ createdAt: -1 });
+  return Transaction.findOne({ contract_id: contractId }).sort({
+    createdAt: -1,
+  });
+}
+
+async function getAllTransaction(): Promise<any> {
+  const transactions = await Transaction.find().populate({
+    path: "contract_id",
+    populate: {
+      path: "room_id",
+    },
+  });
+  return transactions;
+
 }
 /******************************************************************************
                                 Export default
@@ -66,4 +77,5 @@ export default {
   updateTransactionRefunds,
   getTransaction,
   getTransactionWhereContractId,
+  getAllTransaction,
 } as const;

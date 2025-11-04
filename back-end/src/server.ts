@@ -15,7 +15,10 @@ import { connectDB } from "config/mongodb";
 import { sendError } from "./common/util/response";
 import { setupSwagger } from "./swagger/swaggerConfig";
 import { startDeleteOldPendingHousingAreasJob } from "./jobs/HousingAreaCron";
-import { notifyExpiringContracts, setExpiredContracts } from "./jobs/ContractCron";
+import {
+  notifyExpiringContracts,
+  setExpiredContracts,
+} from "./jobs/ContractCron";
 import { checkExpiredBoostingAds } from "./jobs/BoostingAdsCron";
 /******************************************************************************
                                 Setup
@@ -48,14 +51,17 @@ if (FRONTEND_URL && !allowedOrigins.includes(FRONTEND_URL)) {
 
 app.use(
   cors({
-    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
       // Allow requests with no origin (like mobile apps, curl, postman)
       if (!origin) return callback(null, true);
-      
+
       if (allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
-        callback(new Error('Not allowed by CORS'));
+        callback(new Error("Not allowed by CORS"));
       }
     },
     credentials: true,
@@ -76,7 +82,6 @@ if (ENV.NodeEnv === NodeEnvs.Production) {
   if (!DISABLE_HELMET) {
     app.use(helmet());
   }
-  
 }
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);

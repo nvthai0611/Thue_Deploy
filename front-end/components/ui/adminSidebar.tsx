@@ -14,6 +14,7 @@ import {
   X,
   ChevronRight,
   TrendingUp,
+  NotepadText
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -43,6 +44,12 @@ const navigationItems = [
     label: "Statistics",
     icon: TrendingUp,
     href: "/admin/statistics",
+  },
+  {
+    id: "transactions",
+    label: "Transactions",
+    icon: NotepadText,
+    href: "/admin/manage/transactions",
   },
   {
     id: "settings",

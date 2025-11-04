@@ -227,6 +227,7 @@ transactionRouter.get(
   Paths.Transactions.History,
   TransactionRoutes.getTransaction,
 );
+transactionRouter.get(Paths.Transactions.All, TransactionRoutes.getAllTransaction);
 
 // ContractRoutes
 contractRouter.post(
