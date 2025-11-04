@@ -1,10 +1,10 @@
-import Transaction from "@src/models/Transaction";
-import { parseReq } from "./common/util";
-import { IReq, IRes } from "./common/types";
-import TransactionService from "@src/services/TransactionService";
-import { sendSuccess } from "@src/common/util/response";
 import HttpStatusCodes from "@src/common/constants/HttpStatusCodes";
 import { getUserIdFromRequest } from "@src/common/util/authorization";
+import { sendSuccess } from "@src/common/util/response";
+import Transaction from "@src/models/Transaction";
+import TransactionService from "@src/services/TransactionService";
+import { IReq, IRes } from "./common/types";
+import { parseReq } from "./common/util";
 
 /******************************************************************************
                                 Constants
@@ -156,6 +156,15 @@ async function getTransaction(req: IReq, res: IRes) {
   });
 }
 
+async function getAllTransaction(req: IReq, res: IRes) {
+  const result = await TransactionService.getAllTransaction();
+
+  res.status(HttpStatusCodes.OK).json({
+    message: "Get all transactions successfully",
+    data: result,
+  });
+}
+
 /******************************************************************************
                                 Export default
 ******************************************************************************/
@@ -163,4 +172,5 @@ async function getTransaction(req: IReq, res: IRes) {
 export default {
   addTransaction,
   getTransaction,
+  getAllTransaction,
 } as const;
