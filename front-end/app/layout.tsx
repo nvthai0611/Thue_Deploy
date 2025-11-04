@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import UpdateUserLastActive from "@/components/auth/update-user-last-active";
 import { HolaChatbot } from "@/components/hola-chatbot";
 import GARouteTracker from "@/components/ga-route-tracker";
+import { Suspense } from "react";
 
 const defaultUrl = process.env.NEXT_PUBLIC_SITE_URL
   ? `https://${process.env.NEXT_PUBLIC_SITE_URL}`
@@ -61,7 +62,9 @@ export default async function RootLayout({
 
       <body className="bg-background text-foreground">
         {/* Bắn page_view khi đổi route (App Router) */}
-        <GARouteTracker gaId={GA_ID} />
+        <Suspense fallback={null}>
+          <GARouteTracker gaId={GA_ID} />
+        </Suspense>
 
         <QueryProvider>
           <ThemeProvider
