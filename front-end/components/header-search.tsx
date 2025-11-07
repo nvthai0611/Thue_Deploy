@@ -18,6 +18,7 @@ import {
   User,
   UserPen,
   Bookmark,
+  ShieldQuestion,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -260,6 +261,16 @@ export default function SearchHeader({
             >
               <UserPen className="h-5 w-5" />
               <span>Contracts</span>
+            </Button>
+          </Link>
+          <Link href="/guide">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-sm flex gap-2 items-center"
+            >
+              <ShieldQuestion className="h-5 w-5" />
+              <span>Guide</span>
             </Button>
           </Link>
           {userId && (
