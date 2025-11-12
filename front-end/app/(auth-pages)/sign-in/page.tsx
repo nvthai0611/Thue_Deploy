@@ -19,39 +19,39 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         <form className="flex flex-col mx-auto">
           <Image src={logo} alt="HolaRental" className="w-2/3 mx-auto" />
           <h1 className="text-2xl text-background font-semibold text-center mt-4">
-            Sign in
+            Đăng nhập
           </h1>
           <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
             <Label htmlFor="phone" className="text-background">
-              Phone
+              Số điện thoại
             </Label>
-            <Input name="phone" placeholder="Your phone number" required />
+            <Input name="phone" placeholder="Nhập số điện thoại" required />
             <div className="flex justify-between items-center">
               <Label htmlFor="password" className="text-background">
-                Password
+                Mật khẩu
               </Label>
               <Link
                 className="text-xs text-foreground underline"
                 href="/forgot-password"
               >
-                Forgot Password?
+                Quên mật khẩu?
               </Link>
             </div>
             <Input
               type="password"
               name="password"
-              placeholder="Your password"
+              placeholder="Nhập mật khẩu"
               required
             />
             <Link className="text-xs text-blue-400 " href="/forgot-password">
-              Forgot Password?
+              Quên mật khẩu?
             </Link>
             <SubmitButton
-              pendingText="Signing In..."
+              pendingText="Đang đăng nhập..."
               formAction={signInAction}
               className="bg-red-700 hover:bg-red-800 text-white"
             >
-              Sign in
+              Đăng nhập
             </SubmitButton>
             <FormMessage message={searchParams} />
           </div>
@@ -60,9 +60,9 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
         <OAuthButtons />
 
         <p className="text-sm text-background text-center mt-4">
-          Don't have an account?{" "}
+          Chưa có tài khoản?{" "}
           <Link className="text-blue-400 font-medium " href="/sign-up">
-            Sign up
+            Đăng ký
           </Link>
         </p>
       </Card>

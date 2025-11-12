@@ -148,7 +148,7 @@ export default function SearchHeader({
           <div className="relative w-full">
             <Input
               type="search"
-              placeholder="search room by name or Id"
+              placeholder="Tìm phòng theo tên hoặc mã"
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -177,7 +177,7 @@ export default function SearchHeader({
                         onMouseEnter={() => setOpenSuggestSearch(true)}
                       >
                         <Search className="h-4 w-4 text-red-500" />
-                        Search for "{searchQuery}"
+                        Tìm "{searchQuery}"
                       </li>
                       {searchQueryArray
                         .filter((item: any) =>
@@ -200,7 +200,7 @@ export default function SearchHeader({
                     </>
                   ) : (
                     <li className="px-4 py-2 text-sm text-gray-500">
-                      Enter keyword to see suggest search result
+                      Nhập từ khóa để xem gợi ý tìm kiếm
                     </li>
                   )}
                 </ul>
@@ -218,7 +218,7 @@ export default function SearchHeader({
               className="text-sm flex gap-2 items-center"
             >
               <Scale className="h-5 w-5" />
-              <span>Compare</span>
+              <span>So sánh</span>
             </Button>
           </Link>
           <Button
@@ -239,7 +239,7 @@ export default function SearchHeader({
             aria-label="Saved Rooms"
           >
             <Bookmark className="h-5 w-5" />
-            <span>Saved</span>
+            <span>Đã lưu</span>
           </Button>
           <NotificationBell notifications={notifications} />
 
@@ -250,7 +250,7 @@ export default function SearchHeader({
               className="text-sm flex gap-2 items-center"
             >
               <LayoutDashboard className="h-5 w-5" />
-              <span>My Ads</span>
+              <span>Tin của tôi</span>
             </Button>
           </Link>
           <Link href="/user/contracts">
@@ -260,7 +260,7 @@ export default function SearchHeader({
               className="text-sm flex gap-2 items-center"
             >
               <UserPen className="h-5 w-5" />
-              <span>Contracts</span>
+              <span>Hợp đồng</span>
             </Button>
           </Link>
           <Link href="/guide">
@@ -270,7 +270,7 @@ export default function SearchHeader({
               className="text-sm flex gap-2 items-center"
             >
               <ShieldQuestion className="h-5 w-5" />
-              <span>Guide</span>
+              <span>Hướng dẫn</span>
             </Button>
           </Link>
           {userId && (
@@ -281,7 +281,7 @@ export default function SearchHeader({
                 className="text-sm flex gap-2 items-center"
               >
                 <User className="h-5 w-5" />
-                <span>Account</span>
+                <span>Tài khoản</span>
               </Button>
             </Link>
           )}
@@ -291,7 +291,7 @@ export default function SearchHeader({
               {user && (
                 <Link href="/landlord/register/property-document">
                   <Button className="bg-red-600 text-white hover:bg-red-700">
-                    <Plus className="mr-2 h-4 w-4" /> Register Landlord
+                    <Plus className="mr-2 h-4 w-4" /> Đăng ký chủ trọ
                   </Button>
                 </Link>
               )}
@@ -301,7 +301,7 @@ export default function SearchHeader({
               {user && (
                 <Link href="/landlord/housing-area/create">
                   <Button className="bg-red-600 text-white hover:bg-red-700">
-                    <Plus className="mr-2 h-4 w-4" /> Create Ads
+                    <Plus className="mr-2 h-4 w-4" /> Tạo tin
                   </Button>
                 </Link>
               )}
@@ -315,7 +315,7 @@ export default function SearchHeader({
         <div className="relative">
           <Input
             type="search"
-            placeholder="Search rooms..."
+            placeholder="Tìm kiếm phòng..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-16 h-10"
@@ -327,7 +327,7 @@ export default function SearchHeader({
             className="absolute right-1 top-1 h-8 bg-red-700 hover:bg-red-600 text-white"
             onClick={() => onSearch?.(searchQuery)}
           >
-            Search
+            Tìm kiếm
           </Button>
         </div>
       </div>
@@ -372,7 +372,7 @@ export default function SearchHeader({
                 onClick={() => setIsMenuOpen(false)}
               >
                 <User className="mr-3 h-5 w-5" />
-                <span>About</span>
+                <span>Giới thiệu</span>
               </Link>
             </li>
             <li>
@@ -382,7 +382,7 @@ export default function SearchHeader({
                 onClick={() => setIsMenuOpen(false)}
               >
                 <User className="mr-3 h-5 w-5" />
-                <span>Account</span>
+                <span>Tài khoản</span>
               </Link>
             </li>
             <li>
@@ -392,7 +392,7 @@ export default function SearchHeader({
                 onClick={() => setIsMenuOpen(false)}
               >
                 <MessageSquare className="mr-3 h-5 w-5" />
-                <span>Chat</span>
+                <span>Trò chuyện</span>
               </Link>
             </li>
             <li>
@@ -402,7 +402,7 @@ export default function SearchHeader({
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Bell className="mr-3 h-5 w-5" />
-                <span>Notifications</span>
+                <span>Thông báo</span>
               </Link>
             </li>
             <li>
@@ -412,7 +412,7 @@ export default function SearchHeader({
                 onClick={() => setIsMenuOpen(false)}
               >
                 <LayoutDashboard className="mr-3 h-5 w-5" />
-                <span>Dashboard</span>
+                <span>Quản lý tin</span>
               </Link>
             </li>
             <li className="pt-4">
@@ -421,7 +421,7 @@ export default function SearchHeader({
                 onClick={() => setIsMenuOpen(false)}
               >
                 <Button className="w-full bg-red-700 text-white hover:bg-red-600">
-                  <Plus className="mr-2 h-4 w-4" /> Post Ad
+                  <Plus className="mr-2 h-4 w-4" /> Đăng tin
                 </Button>
               </Link>
             </li>

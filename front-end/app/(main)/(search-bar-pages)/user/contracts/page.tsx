@@ -21,6 +21,18 @@ import { debounce } from "lodash";
 import fetchWithAuth from "@/utils/api/fetchWithAuth";
 import ContractStatistics from "@/components/contract-statistics";
 
+const STATUS_LABELS: Record<string, string> = {
+  [ContractStatus.active]: "Đang hiệu lực",
+  [ContractStatus.pending]: "Chờ duyệt",
+  [ContractStatus.terminated]: "Đã chấm dứt",
+  [ContractStatus.expired]: "Hết hạn",
+};
+
+const ROOM_TYPE_LABELS: Record<string, string> = {
+  SINGLE: "Phòng đơn",
+  COUPLE: "Phòng đôi",
+};
+
 // Individual contract component for displaying contract details
 function ContractDetail({ contract }: { contract: Contract }) {
   const { data: room } = useGetRoomDetailByRoomId(contract.room_id);
@@ -28,33 +40,33 @@ function ContractDetail({ contract }: { contract: Contract }) {
   // Configure badge styling based on contract status
   let badgeColor = "bg-gray-300 text-gray-700";
   let borderColor = "border-gray-300";
-  let badgeText = contract?.status || "Unknown";
+  let badgeText = STATUS_LABELS[contract?.status ?? ""] || "Không xác định";
 
   switch (contract.status) {
     case ContractStatus.active:
       badgeColor = "bg-green-200 hover:bg-green-300 text-green-700";
       borderColor = "border-green-400";
-      badgeText = "Active";
+      badgeText = STATUS_LABELS[ContractStatus.active];
       break;
     case ContractStatus.pending:
       badgeColor = "bg-gray-200 hover:bg-gray-300 text-gray-700";
       borderColor = "border-gray-400";
-      badgeText = "Pending";
+      badgeText = STATUS_LABELS[ContractStatus.pending];
       break;
     case ContractStatus.terminated:
       badgeColor = "bg-red-200 hover:bg-red-300 text-red-700";
       borderColor = "border-red-400";
-      badgeText = "Terminated";
+      badgeText = STATUS_LABELS[ContractStatus.terminated];
       break;
     case ContractStatus.expired:
       badgeColor = "bg-yellow-200 hover:bg-yellow-300 text-yellow-700";
       borderColor = "border-yellow-400";
-      badgeText = "Expired";
+      badgeText = STATUS_LABELS[ContractStatus.expired];
       break;
     default:
       badgeColor = "bg-gray-200 hover:bg-gray-300 text-gray-700";
       borderColor = "border-gray-300";
-      badgeText = contract?.status || "Unknown";
+      badgeText = STATUS_LABELS[contract?.status ?? ""] || "Không xác định";
   }
 
   return (
@@ -73,29 +85,31 @@ function ContractDetail({ contract }: { contract: Contract }) {
               <Badge className={clsx(badgeColor)}>{badgeText}</Badge>
               {contract?.signature?.owner_signature && (
                 <Badge className="bg-yellow-500 hover:bg-yellow-600 ">
-                  landlord signed
+                  Chủ trọ đã ký
                 </Badge>
               )}
               {contract?.isDispute && (
-                <Badge className="bg-red-500 hover:bg-red-600">Disputing</Badge>
+                <Badge className="bg-red-500 hover:bg-red-600">
+                  Đang tranh chấp
+                </Badge>
               )}
             </div>
 
             {/* Housing area name */}
             <span className="flex items-center gap-1 text-2xl font-semibold mb-3">
-              {room?.housing_area?.name || "Unknown"}
+              {room?.housing_area?.name || "Chưa cập nhật"}
             </span>
 
             {/* Room details first row */}
             <div className="flex flex-wrap gap-4 text-secondary-foreground text-base mb-1">
               <span className="flex items-center gap-1">
-                Room:{" "}
-                <span className="font-medium">{room?.title || "Unknown"}</span>
+                Phòng:{" "}
+                <span className="font-medium">{room?.title || "Chưa cập nhật"}</span>
               </span>
               <span className="flex items-center gap-1">
-                Price:{" "}
+                Giá thuê:{" "}
                 <span className="font-medium">
-                  {room?.price?.toLocaleString() || "?"} VND
+                  {room?.price?.toLocaleString("vi-VN") || "?"} đ
                 </span>
               </span>
             </div>
@@ -103,15 +117,17 @@ function ContractDetail({ contract }: { contract: Contract }) {
             {/* Room details second row */}
             <div className="flex flex-wrap gap-4 text-secondary-foreground text-base mb-1">
               <span className="flex items-center gap-1">
-                Area:{" "}
+                Diện tích:{" "}
                 <span className="font-medium">{room?.area || "?"} m²</span>
               </span>
               <span className="flex items-center gap-1">
-                Type:{" "}
-                <span className="font-medium">{room?.type || "Unknown"}</span>
+                Loại:{" "}
+                <span className="font-medium">
+                  {ROOM_TYPE_LABELS[room?.type ?? ""] || room?.type || "Chưa cập nhật"}
+                </span>
               </span>
               <span className="flex items-center gap-1">
-                Max Occupancy:{" "}
+                Số người tối đa:{" "}
                 <span className="font-medium">
                   {room?.max_occupancy || "?"}
                 </span>
@@ -121,12 +137,12 @@ function ContractDetail({ contract }: { contract: Contract }) {
             {/* Contract dates */}
             <div className="flex flex-wrap gap-6 text-sm text-gray-500">
               <span className="flex items-center gap-1">
-                Created:{" "}
-                {new Date(contract.createdAt).toLocaleDateString("en-GB")}
+                Ngày tạo:{" "}
+                {new Date(contract.createdAt).toLocaleDateString("vi-VN")}
               </span>
               <span className="flex items-center gap-1">
-                Expiry:{" "}
-                {new Date(contract.end_date).toLocaleDateString("en-GB")}
+                Ngày hết hạn:{" "}
+                {new Date(contract.end_date).toLocaleDateString("vi-VN")}
               </span>
             </div>
           </div>
@@ -307,7 +323,7 @@ export default function ContractsPage() {
   return (
     <div className="bg-primary-foreground">
       <div className="min-h-[500px] max-w-3xl mx-auto py-8 px-4">
-        <h1 className="text-4xl font-bold mb-6">My Contracts</h1>
+        <h1 className="text-4xl font-bold mb-6">Hợp đồng của tôi</h1>
 
         {/* Thống kê cho landlord */}
         {isLandlord && (
@@ -320,25 +336,25 @@ export default function ContractsPage() {
         <div className="mb-4">
           <div className="flex flex-wrap gap-2">
             {[
-              { key: "all", label: "All", count: contractCounts.all },
+              { key: "all", label: "Tất cả", count: contractCounts.all },
               {
                 key: ContractStatus.active,
-                label: "Active",
+                label: STATUS_LABELS[ContractStatus.active],
                 count: contractCounts.active,
               },
               {
                 key: ContractStatus.pending,
-                label: "Pending",
+                label: STATUS_LABELS[ContractStatus.pending],
                 count: contractCounts.pending,
               },
               {
                 key: ContractStatus.expired,
-                label: "Expired",
+                label: STATUS_LABELS[ContractStatus.expired],
                 count: contractCounts.expired,
               },
               {
                 key: ContractStatus.terminated,
-                label: "Terminated",
+                label: STATUS_LABELS[ContractStatus.terminated],
                 count: contractCounts.terminated,
               },
             ].map((filter) => (
@@ -363,7 +379,7 @@ export default function ContractsPage() {
           <div className="relative flex-1">
             <Input
               type="text"
-              placeholder="Search by housing area..."
+              placeholder="Tìm theo tên khu trọ..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="pl-4 pr-4 py-2 w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -375,7 +391,7 @@ export default function ContractsPage() {
                 checked={showUnsigned}
                 onCheckedChange={() => setShowUnsigned((v) => !v)}
               />
-              <span className="text-sm">Only unsigned contracts</span>
+              <span className="text-sm">Chỉ hiển thị hợp đồng chưa ký</span>
             </label>
           )}
         </div>
@@ -383,38 +399,40 @@ export default function ContractsPage() {
         {/* Filter Summary */}
         {(statusFilter !== "all" || search || showUnsigned) && (
           <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-            Showing {filteredContracts.length} contract
-            {filteredContracts.length !== 1 ? "s" : ""}
-            {statusFilter !== "all" && ` with status "${statusFilter}"`}
-            {search && ` matching "${search}"`}
-            {showUnsigned && ` (unsigned only)`}
-            {(statusFilter !== "all" || search || showUnsigned) && (
-              <button
-                onClick={() => {
-                  setStatusFilter("all");
-                  setSearch("");
-                  setShowUnsigned(false);
-                }}
-                className="ml-2 text-blue-600 hover:underline"
-              >
-                Clear filters
-              </button>
-            )}
+            Đang hiển thị {filteredContracts.length} hợp đồng
+            {statusFilter !== "all" &&
+              ` với trạng thái "${
+                STATUS_LABELS[statusFilter] || "Không xác định"
+              }"`}
+            {search && ` có chứa "${search}"`}
+            {showUnsigned && " (chỉ hợp đồng chưa ký)"}
+            <button
+              onClick={() => {
+                setStatusFilter("all");
+                setSearch("");
+                setShowUnsigned(false);
+              }}
+              className="ml-2 text-blue-600 hover:underline"
+            >
+              Xóa bộ lọc
+            </button>
           </div>
         )}
 
         {/* Contract List */}
         {Object.keys(roomData).length === 0 && contracts?.length > 0 ? (
-          <div className="text-center text-gray-500">Loading contracts...</div>
+          <div className="text-center text-gray-500">
+            Đang tải danh sách hợp đồng...
+          </div>
         ) : filteredContracts.length === 0 &&
           (search || statusFilter !== "all" || showUnsigned) ? (
           <div className="text-center text-gray-500">
-            No contracts found with current filters.
+            Không tìm thấy hợp đồng nào với bộ lọc hiện tại.
           </div>
         ) : filteredContracts.length === 0 ? (
           <Image
             src={empty}
-            alt="No contracts"
+            alt="Không có hợp đồng"
             className="mx-auto w-1/2 h-1/2 object-cover"
           />
         ) : (
@@ -432,8 +450,8 @@ export default function ContractsPage() {
                   className="px-6 py-2 rounded bg-red-600 text-white hover:bg-red-700 transition"
                   onClick={() => setVisibleCount((prev) => prev + 5)}
                 >
-                  Load more ({filteredContracts.length - visibleCount}{" "}
-                  remaining)
+                  Xem thêm (còn {filteredContracts.length - visibleCount} hợp
+                  đồng)
                 </button>
               </div>
             )}

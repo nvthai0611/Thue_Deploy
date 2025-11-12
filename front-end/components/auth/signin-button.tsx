@@ -12,7 +12,7 @@ export default function SignInButton() {
 
   return (
     <Button size="sm" variant="outline" onClick={handleSignIn}>
-      Sign in
+      Đăng nhập
     </Button>
   );
 }

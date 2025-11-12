@@ -26,6 +26,7 @@ import { useUserStore } from "@/store/useUserStore";
 import { FacilityCodeMap } from "@/utils/constants/facility-codes";
 import { useLoadScript } from "@react-google-maps/api";
 import { formatDistanceToNow } from "date-fns";
+import { vi } from "date-fns/locale";
 import {
   BedDouble,
   BedSingle,
@@ -39,6 +40,11 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
+
+const ROOM_TYPE_LABELS: Record<string, string> = {
+  SINGLE: "Phòng đơn",
+  COUPLE: "Phòng đôi",
+};
 
 export default function page() {
   const { roomId } = useParams();
@@ -81,13 +87,16 @@ export default function page() {
   const timeAgo = useMemo(() => {
     const updatedAt = room?.updatedAt || room?.createdAt;
     return updatedAt
-      ? formatDistanceToNow(new Date(updatedAt), { addSuffix: true })
-      : "Unknown time";
+      ? formatDistanceToNow(new Date(updatedAt), {
+          addSuffix: true,
+          locale: vi,
+        })
+      : "Không rõ thời gian";
   }, [room?.updatedAt, room?.createdAt]);
 
   const breadcrumbItems = [
-    { name: "Home", href: "/" },
-    { name: "Room Details" },
+    { name: "Trang chủ", href: "/" },
+    { name: "Chi tiết phòng" },
   ];
 
   useEffect(() => {
@@ -103,22 +112,17 @@ export default function page() {
     fetchUser();
   }, [supabase, landlordId]);
 
-  console.log(room);
-  console.log("Landlord Data:", JSON.stringify(landlordData));
-  console.log("Landlord Detail:", JSON.stringify(landlordDetail));
-  console.log("Rooms:", JSON.stringify(rooms));
-
   const onChatClick = async () => {
     // Save landlordId to chat_with_users of current user
     // Save landlordId to chat_with_users of current user
     await updateChatWithUserMutation
       .mutateAsync()
       .then(() => {
-        console.log("Chat with user updated successfully");
+        console.log("Đã cập nhật danh sách trò chuyện");
         router.push(`/chat/${landlordId}`);
       })
       .catch((error) => {
-        console.error("Error updating chat with user:", error);
+        console.error("Lỗi cập nhật trò chuyện:", error);
       });
   };
 
@@ -128,10 +132,10 @@ export default function page() {
     addSavedRoom
       .mutateAsync(String(roomId))
       .then(() => {
-        toast.success("Room saved successfully!");
+        toast.success("Đã lưu phòng thành công!");
       })
       .catch((error: any) => {
-        toast.error(error?.message || "Failed to save room!");
+        toast.error(error?.message || "Lưu phòng thất bại!");
       });
   };
 
@@ -165,7 +169,6 @@ export default function page() {
   ) {
     return <RoomDetailSkeleton />;
   }
-  console.log(room);
   return (
     <div className="bg-primary-foreground pb-4">
       <div className="max-w-5xl mx-auto pt-6 pl-4">
@@ -183,7 +186,7 @@ export default function page() {
                     src={room.images[mainImgIdx]?.url}
                     alt={
                       room.images[mainImgIdx]?.caption ||
-                      `Room image ${mainImgIdx + 1}`
+                      `Ảnh phòng ${mainImgIdx + 1}`
                     }
                     className={`object-cover w-full h-full transition-all duration-300 ${fade ? "opacity-100" : "opacity-0"}`}
                     style={{ willChange: "opacity, transform" }}
@@ -211,7 +214,7 @@ export default function page() {
                             <CardContent className="flex aspect-video items-center justify-center p-0">
                               <img
                                 src={img?.url}
-                                alt={img.caption || `Room thumbnail ${idx + 1}`}
+                                alt={img.caption || `Ảnh thu nhỏ ${idx + 1}`}
                                 className="object-cover w-full h-24 rounded-lg"
                               />
                             </CardContent>
@@ -226,10 +229,10 @@ export default function page() {
 
             {/* Room Information */}
             <div className="p-4">
-              <h2 className="text-2xl font-bold text-foreground">{`Room: ${room?.room_number} - ${room?.title}`}</h2>
+              <h2 className="text-2xl font-bold text-foreground">{`Phòng: ${room?.room_number} - ${room?.title}`}</h2>
               <div className="flex flex-row items-center my-2">
                 <span className="font-semibold text-lg text-red-600 relative after:content-['•'] after:mx-2 after:text-gray-500">
-                  {room?.price.toLocaleString()} VND
+                  {room?.price.toLocaleString("vi-VN")} đ
                 </span>
 
                 <span className="font-semibold text-lg text-secondary-foreground">
@@ -242,14 +245,14 @@ export default function page() {
                     <>
                       <BedSingle className="w-4 h-4" />
                       <Badge className="bg-blue-600 hover:bg-blue-700 text-white">
-                        {room.type}
+                        {ROOM_TYPE_LABELS[room.type] || room.type}
                       </Badge>
                     </>
                   ) : (
                     <>
                       <BedDouble className="w-5 h-5" />
                       <Badge className="bg-yellow-500 hover:bg-yellow-600 text-white">
-                        {room.type}
+                        {ROOM_TYPE_LABELS[room.type] || room.type}
                       </Badge>
                     </>
                   )}
@@ -268,7 +271,7 @@ export default function page() {
                         </Badge>
                       ))
                     ) : (
-                      <span className="text-gray-400">No facilities.</span>
+                      <span className="text-gray-400">Chưa có tiện ích.</span>
                     )}
                   </span>
                 </div>
@@ -278,18 +281,18 @@ export default function page() {
                     {housingAreaDetails.location ? (
                       <span>{`${housingAreaDetails.location.address}, ${housingAreaDetails.location.district}, ${housingAreaDetails.location.city}`}</span>
                     ) : (
-                      "123 Main St, City, Country"
+                      "123 Đường Chính, Thành phố"
                     )}
                   </span>
                 </div>
                 <div className="flex flex-row gap-3 items-center text-secondary-foreground">
                   <ClockIcon className="w-4 h-4" />
-                  <span>Updated {timeAgo}</span>
+                  <span>Cập nhật {timeAgo}</span>
                 </div>
               </div>
 
               <div className="mt-10">
-                <h2 className="text-xl font-bold mb-4">Detailed description</h2>
+                <h2 className="text-xl font-bold mb-4">Mô tả chi tiết</h2>
                 {descriptionLines && (
                   <>
                     {descriptionLines
@@ -308,7 +311,7 @@ export default function page() {
                       onClick={toggleDescription}
                       className="bg-red-600 hover:bg-red-700 text-white w-1/6"
                     >
-                      {isExpanded ? "See less" : "See more"}
+                      {isExpanded ? "Thu gọn" : "Xem thêm"}
                     </Button>
                   </>
                 )}
@@ -330,14 +333,14 @@ export default function page() {
                   }
                   className="object-cover"
                 />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>CT</AvatarFallback>
               </Avatar>
               <div>
                 <p className="text-xl font-semibold text-foreground">
-                  {landlordData?.name || "Unknown User"}
+                  {landlordData?.name || "Chưa cập nhật"}
                 </p>
                 <p className="text-sm text-secondary-foreground/60 font-semibold">
-                  Landlord
+                  Chủ trọ
                 </p>
               </div>
             </div>
@@ -348,7 +351,7 @@ export default function page() {
                 className="w-full mt-2 bg-red-500 hover:bg-red-600 text-white hover:text-white"
                 onClick={handleSave}
               >
-                <Bookmark className="mr-2" /> Save
+                <Bookmark className="mr-2" /> Lưu phòng
               </Button>
               <Button
                 variant={"outline"}
@@ -356,7 +359,7 @@ export default function page() {
                 onClick={onChatClick}
               >
                 <MessagesSquare className="mr-2" />
-                Chat
+                Trò chuyện
               </Button>
               {currentUserDetail?.verified ? (
                 <Button
@@ -364,7 +367,7 @@ export default function page() {
                   onClick={() => router.push(`${roomId}/rent`)}
                 >
                   <Handshake className="mr-2" />
-                  Let's rent!
+                  Đặt thuê ngay
                 </Button>
               ) : (
                 <Button
@@ -373,7 +376,7 @@ export default function page() {
                   onClick={() => router.push(`/user/${currentUserId}`)}
                 >
                   <Handshake className="mr-2" />
-                  Verify account to rent now
+                  Xác minh tài khoản để thuê
                 </Button>
               )}
               <Button
@@ -383,7 +386,7 @@ export default function page() {
                   router.push(`/user/housing-area/${room?.housing_area_id}`)
                 }
               >
-                Visit the housing area
+                Xem khu trọ
               </Button>
             </div>
           </div>
@@ -403,7 +406,7 @@ export default function page() {
 
         {/* Similar postings */}
         <div className="rounded-lg bg-background shadow-lg mt-4 p-4">
-          <h2 className="text-xl font-bold mb-4">Similar postings</h2>
+          <h2 className="text-xl font-bold mb-4">Phòng tương tự</h2>
           <Carousel className="w-full">
             <CarouselContent>
               {rooms?.map((room: any) => (
@@ -425,11 +428,11 @@ export default function page() {
                       />
                       <CardContent className="flex-1 flex flex-col p-1">
                         <span className="text-base font-semibold ">
-                          {`Room: ${room?.room_number} - ${room?.title}`}
+                          {`Phòng: ${room?.room_number} - ${room?.title}`}
                         </span>
                         <div className="flex flex-row items-center mt-1">
                           <span className="text-red-600 relative after:content-['•'] after:mx-1 after:text-gray-500 text-sm font-bold">
-                            {room.price.toLocaleString()} đ/ month
+                            {room.price.toLocaleString("vi-VN")} đ/tháng
                           </span>
                           <span className="text-xs font-bold text-secondary-foreground">
                             {room.area} m²
@@ -437,7 +440,7 @@ export default function page() {
                         </div>
                         <div className="flex flex-row items-center gap-2 mt-1">
                           <span className="text-sm font-bold text-secondary-foreground">
-                            Type:{" "}
+                            Loại:
                           </span>
                           <Badge
                             className={
@@ -446,15 +449,13 @@ export default function page() {
                                 : "bg-yellow-500 hover:bg-yellow-600 text-white"
                             }
                           >
-                            {room.type}
+                            {ROOM_TYPE_LABELS[room.type] || room.type}
                           </Badge>
                         </div>
 
                         <div className="flex flex-row items-center mt-1">
                           <span className="text-sm font-bold text-secondary-foreground">
-                            Max occupancy:{" "}
-                            {room.max_occupancy ? room.max_occupancy : ""}{" "}
-                            persons
+                            Số người tối đa: {room.max_occupancy ? `${room.max_occupancy} người` : "Chưa cập nhật"}
                           </span>
                         </div>
                       </CardContent>
@@ -469,7 +470,7 @@ export default function page() {
         {/* Other ads */}
         <div className="rounded-lg bg-background shadow-lg mt-4 p-4">
           <h2 className="text-xl font-bold mb-4">
-            Other ads from {landlordData?.name || "Unknown User"}
+            Tin khác từ {landlordData?.name || "Chưa cập nhật"}
           </h2>
           <Carousel className="w-full">
             <CarouselContent>
@@ -492,11 +493,11 @@ export default function page() {
                       />
                       <CardContent className="flex-1 flex flex-col p-1">
                         <span className="text-base font-semibold ">
-                          {`Room: ${room?.room_number} - ${room?.title}`}
+                          {`Phòng: ${room?.room_number} - ${room?.title}`}
                         </span>
                         <div className="flex flex-row items-center mt-1">
                           <span className="text-red-600 relative after:content-['•'] after:mx-1 after:text-gray-500 text-sm font-bold">
-                            {room.price.toLocaleString()} đ/ month
+                            {room.price.toLocaleString("vi-VN")} đ/tháng
                           </span>
                           <span className="text-xs font-bold text-secondary-foreground">
                             {room.area} m²
@@ -504,7 +505,7 @@ export default function page() {
                         </div>
                         <div className="flex flex-row items-center gap-2 mt-1">
                           <span className="text-sm font-bold text-secondary-foreground">
-                            Type:{" "}
+                            Loại:
                           </span>
                           <Badge
                             className={
@@ -513,15 +514,13 @@ export default function page() {
                                 : "bg-yellow-500 hover:bg-yellow-600 text-white"
                             }
                           >
-                            {room.type}
+                            {ROOM_TYPE_LABELS[room.type] || room.type}
                           </Badge>
                         </div>
 
                         <div className="flex flex-row items-center mt-1 ">
                           <span className="text-sm font-bold text-secondary-foreground ">
-                            Max occupancy:{" "}
-                            {room.max_occupancy ? room.max_occupancy : ""}{" "}
-                            persons
+                            Số người tối đa: {room.max_occupancy ? `${room.max_occupancy} người` : "Chưa cập nhật"}
                           </span>
                         </div>
                       </CardContent>
