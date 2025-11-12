@@ -118,11 +118,11 @@ export default function page() {
     await updateChatWithUserMutation
       .mutateAsync()
       .then(() => {
-        console.log("Chat with user updated successfully");
+        console.log("Đã cập nhật danh sách trò chuyện");
         router.push(`/chat/${landlordId}`);
       })
       .catch((error) => {
-        console.error("Error updating chat with user:", error);
+        console.error("Lỗi cập nhật trò chuyện:", error);
       });
   };
 
@@ -169,7 +169,6 @@ export default function page() {
   ) {
     return <RoomDetailSkeleton />;
   }
-  console.log(room);
   return (
     <div className="bg-primary-foreground pb-4">
       <div className="max-w-5xl mx-auto pt-6 pl-4">
@@ -441,7 +440,7 @@ export default function page() {
                         </div>
                         <div className="flex flex-row items-center gap-2 mt-1">
                           <span className="text-sm font-bold text-secondary-foreground">
-                            Loại: {" "}
+                            Loại:
                           </span>
                           <Badge
                             className={
@@ -456,7 +455,7 @@ export default function page() {
 
                         <div className="flex flex-row items-center mt-1">
                           <span className="text-sm font-bold text-secondary-foreground">
-                            Số người tối đa: {room.max_occupancy ? room.max_occupancy : ""} người
+                            Số người tối đa: {room.max_occupancy ? `${room.max_occupancy} người` : "Chưa cập nhật"}
                           </span>
                         </div>
                       </CardContent>
@@ -506,7 +505,7 @@ export default function page() {
                         </div>
                         <div className="flex flex-row items-center gap-2 mt-1">
                           <span className="text-sm font-bold text-secondary-foreground">
-                            Loại: {" "}
+                            Loại:
                           </span>
                           <Badge
                             className={
@@ -521,7 +520,7 @@ export default function page() {
 
                         <div className="flex flex-row items-center mt-1 ">
                           <span className="text-sm font-bold text-secondary-foreground ">
-                            Số người tối đa: {room.max_occupancy ? room.max_occupancy : ""} người
+                            Số người tối đa: {room.max_occupancy ? `${room.max_occupancy} người` : "Chưa cập nhật"}
                           </span>
                         </div>
                       </CardContent>
