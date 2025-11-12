@@ -54,7 +54,7 @@ export default function AuthButton() {
     <div className="flex items-center gap-4">
       Hey, {userDetail?.name} !
       <Button variant={"outline"} onClick={onSignOut}>
-        Sign out
+        Đăng xuất
       </Button>
     </div>
   ) : (

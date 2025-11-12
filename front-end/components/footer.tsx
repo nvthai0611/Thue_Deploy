@@ -22,10 +22,10 @@ export default function Footer() {
       <div>
         <Image src={logo} alt="HolaRental" className="lg:w-1/2 -mt-5 -ml-1" />
         <p className="md:text-xl lg:text-4xl font-semibold">
-          Find your perfect room
+          Tìm căn phòng phù hợp nhất
         </p>
         <p className="lg:text-xl text-foreground mt-4 italic">
-          for your student life
+          cho cuộc sống sinh viên của bạn
         </p>
       </div>
       <div />
@@ -33,14 +33,14 @@ export default function Footer() {
         <div>
           <h1 className="text-sm lg:text-2xl font-semibold">HolaRental</h1>
           <div className="border-l-4 border-red-700 pl-5 lg:mt-5">
-            <p className="text-sm my-2">Home</p>
-            <p className="text-sm my-2">About</p>
+            <p className="text-sm my-2">Trang chủ</p>
+            <p className="text-sm my-2">Giới thiệu</p>
             <p className="text-sm my-2">Blog</p>
-            <p className="text-sm my-2">Contact</p>
+            <p className="text-sm my-2">Liên hệ</p>
           </div>
         </div>
         <div>
-          <h1 className="text-sm lg:text-2xl font-semibold">Follow</h1>
+          <h1 className="text-sm lg:text-2xl font-semibold">Theo dõi</h1>
           <div className="flex gap-2 lg:mt-5">
             <FacebookIcon />
             <InstagramIcon />
