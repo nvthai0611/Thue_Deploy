@@ -129,18 +129,26 @@ function SearchContent() {
 
   const allRooms: Room[] = data?.data || [];
   const sortFields = [
-    { value: "", label: "Default" },
-    { value: "price", label: "Price" },
-    { value: "area", label: "Area" },
-    { value: "max_occupants", label: "Max Occupants" },
-    { value: "created_at", label: "Created At" },
+    { value: "", label: "Mặc định" },
+    { value: "price", label: "Giá" },
+    { value: "area", label: "Diện tích" },
+    { value: "max_occupants", label: "Số người tối đa" },
+    { value: "created_at", label: "Ngày tạo" },
   ];
   const sortOrders = [
-    { value: "", label: "Default" },
-    { value: "asc", label: "Ascending" },
-    { value: "desc", label: "Descending" },
+    { value: "", label: "Mặc định" },
+    { value: "asc", label: "Tăng dần" },
+    { value: "desc", label: "Giảm dần" },
   ];
   const fixedFacilityCodes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  const statusLabels: Record<string, string> = {
+    AVAILABLE: "Còn trống",
+    OCCUPIED: "Đã thuê",
+  };
+  const roomTypeLabels: Record<string, string> = {
+    SINGLE: "Phòng đơn",
+    COUPLE: "Phòng đôi",
+  };
 
   return (
     <div className="bg-background overflow-x-hidden w-full sm:w-[90%] lg:w-[70%] mx-auto">
@@ -155,7 +163,7 @@ function SearchContent() {
                   strokeWidth={1}
                 />
                 <h2 className="text-foreground/70 text-center text-lg sm:text-xl mt-4">
-                  No results found
+                  Không có kết quả phù hợp
                 </h2>
               </div>
             )}
@@ -224,7 +232,7 @@ function SearchContent() {
                                         : "bg-gray-50 text-gray-600"
                                   }`}
                                 >
-                                  {listing.status}
+                                  {statusLabels[listing.status] ?? listing.status}
                                 </span>
                               </div>
                             )}
@@ -271,9 +279,13 @@ function SearchContent() {
                                 : ""}
                             </span>
                             <span className="text-gray-400">•</span>
-                            {listing.boost_status == "active" ? <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
-                              Priority Post
-                            </span>: ""}
+                            {listing.boost_status == "active" ? (
+                              <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
+                                Tin ưu tiên
+                              </span>
+                            ) : (
+                              ""
+                            )}
                           </div>
 
                           {/* User Info */}
@@ -289,7 +301,7 @@ function SearchContent() {
                                 <p className="text-xs sm:text-sm text-gray-900">
                                 {listing.owner.identity_card.full_name}
                                 </p>
-                                <p className="text-xs text-gray-500">Online</p>
+                                <p className="text-xs text-gray-500">Đang hoạt động</p>
                               </div>
                             </div>
 
@@ -297,13 +309,13 @@ function SearchContent() {
                             <div className="flex gap-2">
                               <Link href={`/chat/${listing.housing_area.owner_id}`}>
                               <button className="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded hover:bg-gray-50 transition-colors">
-                                Contact
+                                Liên hệ
                               </button>
                               </Link>
                               
                               <Link href={`/user/room/${listing._id}`}>
                               <button className="px-3 py-1.5 text-sm text-white bg-red-600 rounded hover:bg-red-700 transition-colors">
-                                Details
+                                Chi tiết
                               </button>
                               </Link>
                             </div>
@@ -330,7 +342,7 @@ function SearchContent() {
                     className="flex items-center justify-between w-full mb-3"
                   >
                     <h3 className="font-medium text-sm sm:text-base">
-                      Filter by Area
+                      Lọc theo diện tích
                     </h3>
                     <span
                       className={`${showMoneyFilter ? "text-red-400" : ""} text-sm`}
@@ -369,7 +381,7 @@ function SearchContent() {
                     className="flex items-center justify-between w-full mb-3"
                   >
                     <h3 className="font-medium text-sm sm:text-base">
-                      Filter by Price
+                      Lọc theo giá
                     </h3>
                     <span
                       className={`${showAreaFilter ? "text-red-400" : ""} text-sm`}
@@ -408,7 +420,7 @@ function SearchContent() {
                     className="flex items-center justify-between w-full mb-3"
                   >
                     <h3 className="font-medium text-sm sm:text-base">
-                      Filter by Furniture Status
+                      Lọc theo tiện nghi
                     </h3>
                     <span
                       className={`${showConditionFilter ? "text-red-400" : ""} text-sm`}
@@ -450,7 +462,7 @@ function SearchContent() {
                     className="flex items-center justify-between w-full mb-3"
                   >
                     <h3 className="font-medium text-sm sm:text-base">
-                      Sort By
+                      Sắp xếp
                     </h3>
                     <span
                       className={`${!showSortby ? "text-red-400" : ""} text-sm`}
@@ -493,7 +505,7 @@ function SearchContent() {
                 <div className="flex flex-col w-full">
                   <div className="flex items-center justify-between w-full mb-3">
                     <h3 className="font-medium text-sm sm:text-base">
-                      Filter by Room Type
+                      Lọc theo loại phòng
                     </h3>
                     <button
                       onClick={() =>
@@ -523,7 +535,7 @@ function SearchContent() {
                               );
                             }}
                           />
-                          <span className="text-xs sm:text-sm">{type}</span>
+                          <span className="text-xs sm:text-sm">{roomTypeLabels[type] || type}</span>
                         </label>
                       ))}
                     </div>
