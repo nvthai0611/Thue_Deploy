@@ -13,7 +13,7 @@ export default function SignUpButton() {
 
   return (
     <Button size="sm" variant="default" onClick={handleSignUp}>
-      Sign up
+      Đăng ký
     </Button>
   );
 }

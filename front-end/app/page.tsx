@@ -268,9 +268,9 @@ export default function Home() {
               )}
             >
               {room.type === "COUPLE"
-                ? "Couple"
+                ? "Phòng đôi"
                 : room.type === "SINGLE"
-                  ? "Single"
+                  ? "Phòng đơn"
                   : room.type}
             </span>
           </div>
@@ -281,7 +281,7 @@ export default function Home() {
           </div>
           <div className="absolute bottom-3 left-3">
             <span className="bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
-              ⭐ BOOSTED
+              ⭐ NỔI BẬT
             </span>
           </div>
         </div>
@@ -290,14 +290,14 @@ export default function Home() {
             {room.title}
           </h3>
           <p className="text-xs text-secondary-foreground line-clamp-1 mb-1">
-            {isLoading ? "Đang tải..." : housingArea?.name || "Housing Area"}
+            {isLoading ? "Đang tải..." : housingArea?.name || "Khu trọ"}
           </p>
           <p className="text-xs text-secondary-foreground line-clamp-1 mb-1">
             {isLoading
               ? "Đang tải địa chỉ..."
               : housingArea?.address ||
                 housingArea?.location?.address ||
-                "Location"}
+                "Địa chỉ"}
           </p>
           <div className="flex items-center gap-3 text-xs text-secondary-foreground mb-2">
             <div className="flex items-center gap-1">
@@ -314,7 +314,7 @@ export default function Home() {
               {room.price?.toLocaleString() || "N/A"} đ
             </span>
             <span className="text-xs text-secondary-foreground ml-1">
-              /month
+              /tháng
             </span>
           </div>
         </CardContent>
@@ -359,7 +359,7 @@ export default function Home() {
           <button
             onClick={handleAdminRedirect}
             className="bg-red-600 hover:bg-red-700 rounded-full p-4 shadow-lg text-white transition hover:scale-110"
-            title="Go to Admin Dashboard"
+            title="Đi tới trang quản trị"
           >
             <ArrowRight className="w-8 h-8" />
           </button>
@@ -377,7 +377,7 @@ export default function Home() {
       ) : (
         <div className="bg-background rounded pb-4 w-full max-w-6xl mx-auto mt-8 p-2">
           <p className="text-lg font-semibold">
-            <span className={cn(roboto.className)}>Best Seller</span>
+            <span className={cn(roboto.className)}>Phòng nổi bật</span>
           </p>
           <hr className="mb-5" />
           <Carousel className="w-full">
@@ -405,7 +405,7 @@ export default function Home() {
       ) : (
         <div className="w-full max-w-6xl mx-auto bg-background my-5 px-2 rounded">
           <p className="text-lg font-semibold py-2">
-            <span className={cn(roboto.className)}>Suggestion for you</span>
+            <span className={cn(roboto.className)}>Gợi ý cho bạn</span>
           </p>
           <hr className="mb-5" />
           {(() => {
@@ -422,7 +422,7 @@ export default function Home() {
             if (!roomsWithAreaInfo.length) {
               return (
                 <div className="text-center py-8">
-                  <p className="text-muted-foreground">No rooms available</p>
+                  <p className="text-muted-foreground">Hiện chưa có phòng nào</p>
                 </div>
               );
             }
@@ -441,9 +441,9 @@ export default function Home() {
             const getRoomTypeLabel = (type: string) => {
               switch (type) {
                 case "COUPLE":
-                  return "Couple";
+                  return "Phòng đôi";
                 case "SINGLE":
-                  return "Single";
+                  return "Phòng đơn";
                 default:
                   return type;
               }
@@ -528,7 +528,7 @@ export default function Home() {
                                 {room.price?.toLocaleString()} đ
                               </span>
                               <span className="text-xs text-secondary-foreground ml-1">
-                                /month
+                                /tháng
                               </span>
                             </div>
                           </CardContent>
@@ -542,7 +542,7 @@ export default function Home() {
                       className="px-6 py-2 bg-red-600 text-white rounded hover:bg-red-700 font-semibold transition"
                       onClick={handleLoadMore}
                     >
-                      See more
+                      Xem thêm
                     </button>
                   </div>
                 )}
